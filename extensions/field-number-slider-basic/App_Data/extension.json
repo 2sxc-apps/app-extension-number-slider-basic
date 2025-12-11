@@ -30,6 +30,6 @@
   "dataInside": false,
   "resourcesContentType": null,
   "settingsContentType": null,
-  "inputFieldAssets": "index.js\nindex.css",
+  "inputFieldAssets": "index.js",
   "dataBundles": null
 }
