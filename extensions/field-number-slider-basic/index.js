@@ -32,131 +32,139 @@
   class NumberSlider extends HTMLElement {
     connectedCallback() {
       const connector = this.connector;
-      if (!connector || !connector.data) 
+      if (!connector?.data) 
         return;
 
       const settings = connector.field?.settings || {};
-
       const min = toNumber(settings.Min, 0);
       const max = toNumber(settings.Max, 100);
       const sliderStep = toNumber(settings.SliderStep, 1);
 
-      const initial =
-        typeof connector.data.value === "number"
-          ? connector.data.value
-          : toNumber(settings.Default, min);
+      const initial = typeof connector.data.value === "number"
+        ? connector.data.value
+        : toNumber(settings.Default, min);
 
       const value = clamp(initial, min, max);
 
       this.innerHTML = html;
 
-      // get elements
-      this.rangeEl = this.querySelector(".ns-range");
-      this.minEl = this.querySelector(".ns-min");
-      this.maxEl = this.querySelector(".ns-max");
-      this.tooltipEl = this.querySelector(".ns-tooltip");
-      this.currentEl = this.querySelector(".ns-current-value");
-      this.containerEl = this.querySelector(".ns-slider-container");
+      // Cache DOM elements used by the component
+      this.rangeEl = this.querySelector('.ns-range');
+      this.minEl = this.querySelector('.ns-min');
+      this.maxEl = this.querySelector('.ns-max');
+      this.tooltipEl = this.querySelector('.ns-tooltip');
+      this.currentEl = this.querySelector('.ns-current-value');
+      this.containerEl = this.querySelector('.ns-slider-container');
 
-      if (!this.rangeEl || !this.minEl || !this.maxEl || !this.tooltipEl || !this.currentEl || !this.containerEl)
+      // if no elements available -> exit early
+      if (!(this.rangeEl || this.minEl || this.maxEl || this.tooltipEl || this.currentEl || this.containerEl))
         return;
 
-      // set range
-      this.rangeEl.min = String(min);
-      this.rangeEl.max = String(max);
-      this.rangeEl.step = String(sliderStep);
-      this.rangeEl.value = String(value);
+      // set range attributes
+      this.rangeEl.min = min;
+      this.rangeEl.max = max;
+      this.rangeEl.step = sliderStep;
+      this.rangeEl.value = value;
 
-      // Min/Max Labels
-      this.minEl.textContent = String(min);
-      this.maxEl.textContent = String(max);
+      // ARIA + labels
+      this.rangeEl.setAttribute('role', 'slider');
+      this.rangeEl.setAttribute('aria-valuemin', String(min));
+      this.rangeEl.setAttribute('aria-valuemax', String(max));
+      this.rangeEl.setAttribute('aria-valuenow', String(value));
+      this.minEl.textContent = min;
+      this.maxEl.textContent = max;
 
-      const setDisplay = (val) => {
+      // Read visual thumb size from CSS variable so JS and CSS stay in sync
+      // Fallback to 16px if the variable is not set
+      const thumbSize = parseFloat(getComputedStyle(this.rangeEl).getPropertyValue('--thumb-size')) || 16;
+      const thumbRadius = thumbSize / 2;
+
+      // Compute and position tooltip based on current value
+      const computePos = (val) => {
         if (val == null) {
-          this.currentEl.textContent = "";
-          this.tooltipEl.style.left = "0px";
+          this.currentEl.textContent = '';
+          this.tooltipEl.style.left = '0px';
+          this.rangeEl.setAttribute('aria-valuenow', String(min));
           return;
         }
+        // Clamp and update display text / ARIA
+        const num = clamp(Number(val), min, max);
+        this.currentEl.textContent = num;
+        this.rangeEl.setAttribute('aria-valuenow', String(num));
 
-        const number = Number(val);
-        const clampedValue = clamp(number, min, max);
-
-        this.currentEl.textContent = String(clampedValue);
-
-        // Get the position and size of the input element
+        // Get bounding rectangles and compute thumb position within the container
         const rangeRect = this.rangeEl.getBoundingClientRect();
-
-        // Get the position and size of the slider container
         const containerRect = this.containerEl.getBoundingClientRect();
 
-        // Calculate how far along the slider the value is (0 = min, 1 = max)
-        const ratio = max === min ? 0 : (clampedValue - min) / (max - min);
-
-        // The slider thumb is 16px, so radius = 8px 
-        const thumbRadius = 8;
-
-        // Calculate where the slider track begins
-        const trackStart = rangeRect.left - containerRect.left + thumbRadius;
-
-        // Calculate the usable track width
+        const trackStart = thumbRadius;
         const trackWidth = Math.max(rangeRect.width - thumbRadius * 2, 0);
+        const ratio = max === min ? 0 : (num - min) / (max - min);
 
-        //exact pixel position where the tooltip should appear
-        const x = trackStart + ratio * trackWidth;
+        // position relative to the container: start from the range left offset inside container
+        const x = (rangeRect.left - containerRect.left) + trackStart + ratio * trackWidth;
 
-        this.tooltipEl.style.left = `${x}px`;
+        // Apply optional JS-side correction read from CSS 
+        const corrRaw = getComputedStyle(this.containerEl).getPropertyValue('--tooltip-js-correction');
+        const corr = Number.isFinite(parseFloat(corrRaw)) ? parseFloat(corrRaw) : 0; 
+        const xCorr = x - corr;
+        this.tooltipEl.style.left = `${xCorr}px`;
       };
 
-      const updateValue = (raw) => {
-        if (raw === "" || raw == null) {
-          connector.data.update(null);
-          this.rangeEl.value = String(min);
-          setDisplay(null);
+      // Only call connector.data.update if it exists and value changed
+      const safeUpdate = (n) => {
+        if (typeof connector.data.update === 'function' && connector.data.value !== n) {
+          connector.data.update(n);
+        }
+      };
+
+      // Handle input/change events from the range element
+      const onInput = () => {
+        const raw = this.rangeEl.value;
+        if (raw === '' || raw == null) {
+          safeUpdate(null);
+          this.rangeEl.value = min;
+          computePos(null);
           return;
         }
 
-        const num = Number(raw);
-        if (Number.isNaN(num)) 
-          return;
-
-        const clamped = clamp(num, min, max);
-
-        if (connector.data.value !== clamped) 
-          connector.data.update(clamped);
-
-        this.rangeEl.value = String(clamped);
-        setDisplay(clamped);
+        const n = clamp(Number(raw), min, max);
+        safeUpdate(n);
+        this.rangeEl.value = n;
+        computePos(n);
       };
 
-      // events
-      this.rangeListener = () => updateValue(this.rangeEl.value);
-      this.rangeEl.addEventListener("input", this.rangeListener);
+      // Choose which event to listen to: 'input' (live) or 'change' (on release)
+      const updateOn = settings.UpdateOn === 'change' ? 'change' : 'input';
+      this.onInput = onInput;
+      this.rangeEl.addEventListener(updateOn, this.onInput);
 
-      this.resizeListener = () => {
-        if (!this.rangeEl) 
-          return;
-        setDisplay(this.rangeEl.value);
-      };
-      window.addEventListener("resize", this.resizeListener);
+      // Keep tooltip positioned on layout changes using ResizeObserver
+      if (typeof ResizeObserver !== 'undefined') {
+        this.resizeObs = new ResizeObserver(() => computePos(this.rangeEl.value));
+        this.resizeObs.observe(this.rangeEl);
+      }
 
-      setDisplay(value);
+      computePos(value);
     }
 
     disconnectedCallback() {
-      if (this.rangeEl && this.rangeListener) 
-        this.rangeEl.removeEventListener("input", this.rangeListener);
- 
-      if (this.resizeListener) 
-        window.removeEventListener("resize", this.resizeListener);
-      
+      if (this.rangeEl && this.onInput) {
+        this.rangeEl.removeEventListener('input', this.onInput);
+        this.rangeEl.removeEventListener('change', this.onInput);
+      }
+
+      if (this.resizeObs) {
+        this.resizeObs.disconnect();
+        this.resizeObs = null;
+      }
+
       this.rangeEl = null;
       this.minEl = null;
       this.maxEl = null;
       this.tooltipEl = null;
       this.currentEl = null;
       this.containerEl = null;
-      this.rangeListener = null;
-      this.resizeListener = null;
+      this.onInput = null;
     }
   }
 
