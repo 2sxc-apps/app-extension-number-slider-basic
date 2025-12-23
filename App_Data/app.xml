@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="20.00.09" ExportDate="2025-12-09T15:26:19.4671891+01:00">
+<SexyContent FileVersion="07.00.00" MinimumRequiredVersion="07.04.02" ModuleVersion="21.00.00" ExportDate="2025-12-23T21:47:49.0830337+01:00">
   <Header>
     <App Guid="232efa20-0ce6-497f-be3a-9844c92359c1" />
     <Language Default="en-us" />
@@ -9,11 +9,230 @@
     </Dimensions>
   </Header>
   <AttributeSets>
+    <AttributeSet StaticName="b84b4cbd-c058-4d85-92e5-71e163f9429e" Name="@number-slider-basic" Scope="Extensions.NumberSliderBasic" AlwaysShareConfiguration="false">
+      <Attributes>
+        <Attribute StaticName="SliderStep" Type="Number" IsTitle="true">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="5d617d54-42b6-4feb-9c99-8c029dd9d8c7" Json="True" KeyNumber="6931">
+            <Value Key="CustomJavaScript" Value="" Type="String">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="DefaultValue" Value="1" Type="String">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="Disabled" Value="False" Type="Boolean">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="DisableTranslation" Value="False" Type="Boolean">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="number-default" Type="String">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Slider Step Size" Type="String">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="&lt;p&gt;Step size of the slider, typically 1.&lt;/p&gt;" Type="String">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="Placeholder" Value="" Type="String">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="Required" Value="False" Type="Boolean">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@Number" AttributeSetName="@Number" EntityGUID="d47f534c-2195-410c-8585-69ee7f3079fa" Json="True" KeyNumber="6931">
+            <Value Key="Decimals" Value="0" Type="Number">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="Min" Value="1" Type="Number">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+          </Entity>
+        </Attribute>
+      </Attributes>
+    </AttributeSet>
     <AttributeSet StaticName="App-Resources" Name="App-Resources" Scope="System.App" AlwaysShareConfiguration="false">
       <Attributes />
     </AttributeSet>
     <AttributeSet StaticName="App-Settings" Name="App-Settings" Scope="System.App" AlwaysShareConfiguration="false">
       <Attributes />
+    </AttributeSet>
+    <AttributeSet StaticName="fb12a50d-23c5-43c3-9d6e-e40fad934848" Name="TestSlider" Scope="Default" AlwaysShareConfiguration="false">
+      <Attributes>
+        <Attribute StaticName="Num1To100" Type="Number" IsTitle="true">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="d85af38b-c127-4b53-bb38-ba41eff8aec2" Json="True" KeyNumber="6932">
+            <Value Key="CustomJavaScript" Value="" Type="String">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="DefaultValue" Value="" Type="String">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="Disabled" Value="False" Type="Boolean">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="DisableTranslation" Value="False" Type="Boolean">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="number-slider-basic" Type="String">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Num1To100" Type="String">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="" Type="String">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="Placeholder" Value="" Type="String">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="Required" Value="False" Type="Boolean">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@Number" AttributeSetName="@Number" EntityGUID="b0c8e9bf-341e-49b7-8f02-6039d907fe3c" Json="True" KeyNumber="6932">
+            <Value Key="Decimals" Value="0" Type="Number">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="Max" Value="100" Type="Number">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="Min" Value="1" Type="Number">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="b84b4cbd-c058-4d85-92e5-71e163f9429e" AttributeSetName="@number-slider-basic" EntityGUID="e777a5ac-37e0-41af-b1a1-f07b4bff0443" KeyNumber="6932">
+            <Value Key="SliderStep" Value="" Type="Number">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="Num0To100Step10" Type="Number" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="776266be-86e1-4621-ae8b-1acee27d73b1" Json="True" KeyNumber="6933">
+            <Value Key="CustomJavaScript" Value="" Type="String">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="DefaultValue" Value="" Type="String">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="Disabled" Value="False" Type="Boolean">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="DisableTranslation" Value="False" Type="Boolean">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="number-slider-basic" Type="String">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Num0To100Step10" Type="String">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="" Type="String">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="Placeholder" Value="" Type="String">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="Required" Value="False" Type="Boolean">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@Number" AttributeSetName="@Number" EntityGUID="08c12db0-bb83-42a3-8bfb-5dc45e8200d5" Json="True" KeyNumber="6933">
+            <Value Key="Decimals" Value="0" Type="Number">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="Max" Value="100" Type="Number">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="Min" Value="0" Type="Number">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="b84b4cbd-c058-4d85-92e5-71e163f9429e" AttributeSetName="@number-slider-basic" EntityGUID="1b3a6353-e416-42a4-bee5-77c7ec3db287" KeyNumber="6933">
+            <Value Key="SliderStep" Value="10" Type="Number">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="SliderNotConfigured" Type="Number" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="96d3e38a-9091-40e2-bbf7-a043187f3523" Json="True" KeyNumber="6934">
+            <Value Key="InputType" Value="number-slider-basic" Type="String" />
+            <Value Key="Name" Value="SliderNotConfigured" Type="String" />
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean" />
+          </Entity>
+        </Attribute>
+        <Attribute StaticName="Rating1To7" Type="Number" IsTitle="false">
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@All" AttributeSetName="@All" EntityGUID="65467f49-61eb-47ae-a868-ff8258dec8a9" Json="True" KeyNumber="6981">
+            <Value Key="CustomJavaScript" Value="" Type="String">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="DefaultValue" Value="" Type="String">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="Disabled" Value="False" Type="Boolean">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="DisableTranslation" Value="False" Type="Boolean">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="InputType" Value="number-slider-basic" Type="String">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="Name" Value="Rating1To7" Type="String">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="Notes" Value="" Type="String">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="Placeholder" Value="" Type="String">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="Required" Value="False" Type="Boolean">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="ValidationRegExJavaScript" Value="" Type="String">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="VisibleInEditUI" Value="True" Type="Boolean">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="@Number" AttributeSetName="@Number" EntityGUID="2f89ddb7-4bf6-40e8-8590-1e015d9c8753" Json="True" KeyNumber="6981">
+            <Value Key="Decimals" Value="0" Type="Number">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="Max" Value="7" Type="Number">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+            <Value Key="Min" Value="1" Type="Number">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+          </Entity>
+          <Entity TargetType="2" AssignmentObjectType="EAV Field Properties" AttributeSetStaticName="b84b4cbd-c058-4d85-92e5-71e163f9429e" AttributeSetName="@number-slider-basic" EntityGUID="4a2f79e0-4648-4f6c-8375-60ff73b7cc97" KeyNumber="6981">
+            <Value Key="SliderStep" Value="" Type="Number">
+              <Dimension DimensionID="228" ReadOnly="false" />
+            </Value>
+          </Entity>
+        </Attribute>
+      </Attributes>
     </AttributeSet>
   </AttributeSets>
   <Entities>
@@ -42,13 +261,13 @@
       <Value Key="OriginalId" Value="" Type="String">
         <Dimension DimensionID="228" ReadOnly="false" />
       </Value>
-      <Value Key="RequiredDnnVersion" Value="09.06.01" Type="String">
+      <Value Key="RequiredDnnVersion" Value="09.11.02" Type="String">
         <Dimension DimensionID="228" ReadOnly="false" />
       </Value>
-      <Value Key="RequiredOqtaneVersion" Value="" Type="String">
+      <Value Key="RequiredOqtaneVersion" Value="06.00.00" Type="String">
         <Dimension DimensionID="228" ReadOnly="false" />
       </Value>
-      <Value Key="RequiredVersion" Value="17.00.00" Type="String">
+      <Value Key="RequiredVersion" Value="21.00.00" Type="String">
         <Dimension DimensionID="228" ReadOnly="false" />
       </Value>
       <Value Key="SupportsAjaxReload" Value="False" Type="Boolean">
@@ -79,6 +298,39 @@
       <Value Key="UseForList" Value="False" Type="Boolean" />
       <Value Key="ViewController" Value="" Type="String" />
       <Value Key="ViewNameInUrl" Value="" Type="String" />
+    </Entity>
+    <Entity TargetType="5" AssignmentObjectType="ContentType" AttributeSetStaticName="ContentType" AttributeSetName="ContentType" EntityGUID="face5a41-e2de-4e30-942b-5494379a164e" Json="True" KeyString="b84b4cbd-c058-4d85-92e5-71e163f9429e">
+      <Value Key="AdditionalSettings" Value="" Type="String" />
+      <Value Key="Description" Value="" Type="String" />
+      <Value Key="DynamicChildrenField" Value="" Type="String" />
+      <Value Key="EditInstructions" Value="" Type="String" />
+      <Value Key="Icon" Value="" Type="Hyperlink" />
+      <Value Key="Label" Value="Number Slider Basic" Type="String" />
+      <Value Key="Link" Value="" Type="Hyperlink" />
+      <Value Key="ListInstructions" Value="" Type="String" />
+      <Value Key="Notes" Value="" Type="String" />
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="fb12a50d-23c5-43c3-9d6e-e40fad934848" AttributeSetName="TestSlider" EntityGUID="91cdca62-a271-4444-94ec-a433285bf074">
+      <Value Key="Num0To100Step10" Value="0" Type="Number">
+        <Dimension DimensionID="228" ReadOnly="false" />
+      </Value>
+      <Value Key="Num1To100" Value="56" Type="Number">
+        <Dimension DimensionID="228" ReadOnly="false" />
+      </Value>
+      <Value Key="SliderNotConfigured" Value="84" Type="Number">
+        <Dimension DimensionID="228" ReadOnly="false" />
+      </Value>
+    </Entity>
+    <Entity TargetType="1" AssignmentObjectType="Default" AttributeSetStaticName="fb12a50d-23c5-43c3-9d6e-e40fad934848" AttributeSetName="TestSlider" EntityGUID="3150083d-a935-4a02-b9b2-904504dc123e">
+      <Value Key="Num0To100Step10" Value="80" Type="Number">
+        <Dimension DimensionID="228" ReadOnly="false" />
+      </Value>
+      <Value Key="Num1To100" Value="24" Type="Number">
+        <Dimension DimensionID="228" ReadOnly="false" />
+      </Value>
+      <Value Key="SliderNotConfigured" Value="48" Type="Number">
+        <Dimension DimensionID="228" ReadOnly="false" />
+      </Value>
     </Entity>
   </Entities>
   <PortalFiles />
