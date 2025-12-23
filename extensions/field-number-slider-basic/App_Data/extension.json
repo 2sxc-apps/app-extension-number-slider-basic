@@ -9,14 +9,14 @@
   "linkDocs": "https://docs.2sxc.org/basics/app/app-extensions/input-field.html",
   "linkSource": "https://github.com/2sxc-apps/app-extension-number-slider-basic",
   "linkDemo": "",
-  "version": "00.00.01",
-  "releases": null,
+  "version": "00.90.00",
+  "releases": [],
   "isInstalled": false,
   "editionsSupported": false,
   "sxcSupported": false,
-  "sxcVersionMin": "20.09.00",
+  "sxcVersionMin": "21.00.00",
   "dnnSupported": false,
-  "dnnVersionMin": "10.00.00",
+  "dnnVersionMin": "09.11.02",
   "oqtSupported": false,
   "oqtVersionMin": "06.02.00",
   "inputFieldInside": true,
@@ -31,5 +31,6 @@
   "resourcesContentType": null,
   "settingsContentType": null,
   "inputFieldAssets": "index.js",
-  "dataBundles": null
+  "dataBundles": null,
+  "extensionsBundled": ""
 }

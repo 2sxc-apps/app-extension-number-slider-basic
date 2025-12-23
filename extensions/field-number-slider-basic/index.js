@@ -1,14 +1,18 @@
 /*
   Basic Number slider
 
-  Behaviour:
+  Behavior:
   - Min, Max, Step and Default are read from field.settings.
   - The slider stores a number, an empty value results in null.
 */
 
 (() => {
+  // The tag name of this input field, according to convention
   const tagName = "field-number-slider-basic";
 
+  // HTML template for the component
+  // Also loads the CSS file located next to this JS file
+  // This is not quite optimal, but works well for now.
   const html = `
     <link rel="stylesheet" href="${import.meta.url.replace("index.js","index.css")}" />
 
@@ -29,23 +33,44 @@
       </div>
     </div>`;
 
+  // Enable debug logging
+  const debug = true;
+
+  /**
+   * Custom HTMLElement for the number slider
+   */
   class NumberSlider extends HTMLElement {
+    /**
+     * Standard Custom-HTMLElement connectedCallback
+     * Triggered by the browser.
+     */
     connectedCallback() {
+      // Get connector object from 2sxc
       const connector = this.connector;
+
+      // Debug logging
+      if (debug)
+        console.log(`${tagName} connectedCallback`, { connector });
+
+      // Exit if no data connector available
       if (!connector?.data) 
         return;
 
+      // Read settings
       const settings = connector.field?.settings || {};
       const min = toNumber(settings.Min, 0);
       const max = toNumber(settings.Max, 100);
       const sliderStep = toNumber(settings.SliderStep, 1);
 
+      // Determine initial value
       const initial = typeof connector.data.value === "number"
         ? connector.data.value
         : toNumber(settings.Default, min);
 
+      // Make sure initial value is within bounds
       const value = clamp(initial, min, max);
 
+      // Set inner HTML
       this.innerHTML = html;
 
       // Cache DOM elements used by the component
@@ -68,9 +93,9 @@
 
       // ARIA + labels
       this.rangeEl.setAttribute('role', 'slider');
-      this.rangeEl.setAttribute('aria-valuemin', String(min));
-      this.rangeEl.setAttribute('aria-valuemax', String(max));
-      this.rangeEl.setAttribute('aria-valuenow', String(value));
+      this.rangeEl.setAttribute('aria-valuemin', min);
+      this.rangeEl.setAttribute('aria-valuemax', max);
+      this.rangeEl.setAttribute('aria-valuenow', value);
       this.minEl.textContent = min;
       this.maxEl.textContent = max;
 
@@ -84,13 +109,13 @@
         if (val == null) {
           this.currentEl.textContent = '';
           this.tooltipEl.style.left = '0px';
-          this.rangeEl.setAttribute('aria-valuenow', String(min));
+          this.rangeEl.setAttribute('aria-valuenow', min);
           return;
         }
         // Clamp and update display text / ARIA
         const num = clamp(Number(val), min, max);
         this.currentEl.textContent = num;
-        this.rangeEl.setAttribute('aria-valuenow', String(num));
+        this.rangeEl.setAttribute('aria-valuenow', num);
 
         // Get bounding rectangles and compute thumb position within the container
         const rangeRect = this.rangeEl.getBoundingClientRect();
@@ -177,7 +202,7 @@
     return Math.min(max, Math.max(min, value));
   }
 
-  if (!customElements.get(tagName)) {
+  // Register the custom element if not already defined
+  if (!customElements.get(tagName))
     customElements.define(tagName, NumberSlider);
-  }
 })();
