@@ -12,7 +12,6 @@
 
   // HTML template for the component
   // Also loads the CSS file located next to this JS file
-  // This is not quite optimal, but works well for now.
   const html = `
     <link rel="stylesheet" href="${import.meta.url.replace("index.js","index.css")}" />
 
